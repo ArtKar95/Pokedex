@@ -1,0 +1,51 @@
+import type { ExpoConfig } from "expo/config";
+
+const config: ExpoConfig = {
+  name: "pokedex",
+  slug: "pokedex",
+  version: "1.0.0",
+  orientation: "portrait",
+  icon: "./assets/images/icon.png",
+  scheme: "pokedex",
+  userInterfaceStyle: "automatic",
+  newArchEnabled: true,
+  ios: {
+    supportsTablet: true,
+  },
+  android: {
+    adaptiveIcon: {
+      backgroundColor: "#E6F4FE",
+      foregroundImage: "./assets/images/icon.png",
+    },
+    edgeToEdgeEnabled: true,
+    predictiveBackGestureEnabled: false,
+  },
+  web: {
+    output: "static",
+    favicon: "./assets/images/icon.png",
+  },
+  plugins: [
+    "expo-router",
+    [
+      "expo-splash-screen",
+      {
+        image: "./assets/images/icon.png",
+        imageWidth: 200,
+        resizeMode: "contain",
+        backgroundColor: "#ffffff",
+        dark: {
+          backgroundColor: "#000000",
+        },
+      },
+    ],
+  ],
+  experiments: {
+    typedRoutes: true,
+    reactCompiler: true,
+  },
+  extra: {
+    appEnv: process.env.EXPO_PUBLIC_APP_ENV ?? "development",
+  },
+};
+
+export default config;
