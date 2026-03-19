@@ -1,27 +1,49 @@
-export type PokemonListItem = {
+export interface IPokemonListItem {
   name: string;
   url: string;
-};
+}
 
-export type PokemonListResponse = {
+export interface IPokemonListResponse {
+  count: number;
   next: string | null;
-  results: PokemonListItem[];
+  previous: string | null;
+  results: IPokemonListItem[];
+}
+
+export type IPokemonListRow = {
+  id: number;
+  name: string;
+  image: string;
+  types: string[];
 };
 
-export type PokemonDetail = {
+interface IStat {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
+}
+
+interface IType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
+
+interface ISprite {
+  front_default: string;
+  back_default: string;
+  front_shiny: string;
+  back_shiny: string;
+}
+export interface IPokemonDetail {
   id: number;
   name: string;
   height: number;
   weight: number;
-  stats: {
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }[];
-  types: {
-    type: {
-      name: string;
-    };
-  }[];
-};
+  stats: IStat[];
+  types: IType[];
+  sprites: ISprite;
+}
