@@ -1,12 +1,31 @@
 import COLORS from "@/shared/colors";
 import { useColorScheme } from "react-native";
 
-type ColorProperty = keyof (typeof COLORS)["light"];
+export type ColorProperty = keyof (typeof COLORS)["light"];
 
-const useThemeColor = <K extends ColorProperty>(property: K) => {
+type Palette = (typeof COLORS)["light"];
+
+type UseThemeColorResult<T> = T extends ColorProperty
+  ? string
+  : T extends readonly ColorProperty[]
+    ? { [K in T[number]]: string }
+    : never;
+
+const useThemeColor = <
+  const T extends ColorProperty | readonly ColorProperty[],
+>(
+  propertyOrList: T,
+): UseThemeColorResult<T> => {
   const scheme = useColorScheme();
-  const paletteKey = scheme === "dark" ? "dark" : "light";
-  return COLORS[paletteKey][property];
+  const palette: Palette = COLORS[scheme || "light"];
+
+  if (Array.isArray(propertyOrList)) {
+    return Object.fromEntries(
+      (propertyOrList as ColorProperty[]).map((key) => [key, palette[key]]),
+    ) as UseThemeColorResult<T>;
+  }
+
+  return palette[propertyOrList as ColorProperty] as UseThemeColorResult<T>;
 };
 
 export default useThemeColor;

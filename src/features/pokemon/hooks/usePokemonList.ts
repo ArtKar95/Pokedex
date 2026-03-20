@@ -24,7 +24,10 @@ const usePokemonList = () =>
         details?.map((detail) => ({
           id: detail.id,
           name: detail.name,
-          image: detail.sprites?.front_default ?? "",
+          image:
+            detail.sprites?.other?.home?.front_default ||
+            detail.sprites?.front_default ||
+            "",
           types: detail.types.map((t) => t.type.name),
         })) ?? []
       );
