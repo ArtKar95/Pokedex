@@ -2,7 +2,6 @@ import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
 import ScreenNotice from "@/shared/components/ScreenNotice";
 import { EDGES } from "@/shared/constants";
-import useThemeColor from "@/shared/hooks/useThemeColor";
 import cn from "@/shared/utils/cn";
 import { useRouter } from "expo-router";
 import { ScrollView, View } from "react-native";
@@ -10,12 +9,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PokemonDetailHeader from "../components/PokemonDetailHeader";
 import PokemonDetailTabs from "../components/PokemonDetailTabs/PokemonDetailTabs";
 import PokemonImage from "../components/PokemonImage";
+import { useFavorites } from "../hooks/useFavoritesContext";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 import getPokemonBgClass from "../utils/getPokemonBgClass";
 
 const PokemonDetailPage = ({ id }: { id: string }) => {
   const router = useRouter();
-  const iconColor = useThemeColor("icon");
+  const { favorites, toggle } = useFavorites();
   const { data, isPending, isError, refetch } = usePokemonDetail(id);
 
   if (!id) {
@@ -47,7 +47,7 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
   }
 
   const uri =
-    data.sprites?.other?.home?.front_default ||
+    data.sprites?.other?.["official-artwork"]?.front_default ||
     data.sprites?.front_default ||
     "";
   const imageBgClass = getPokemonBgClass(data.types?.[0]?.type?.name);
@@ -62,8 +62,9 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
         <PokemonDetailHeader
           title={data?.name}
           formattedId={String(data.id).padStart(3, "0")}
-          iconColor={iconColor}
+          isFavorite={favorites.includes(data.id)}
           onBack={() => router.back()}
+          onToggleFavorite={() => toggle(data.id)}
         />
 
         <ScrollView

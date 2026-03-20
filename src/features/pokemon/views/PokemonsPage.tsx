@@ -4,6 +4,7 @@ import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
 import { EDGES } from "@/shared/constants";
 import useDebouncedSearchInput from "@/shared/hooks/useDebouncedSearchInput";
+import useThemeColor from "@/shared/hooks/useThemeColor";
 import { useCallback, useMemo } from "react";
 import { FlatList, RefreshControl, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +14,7 @@ import usePokemonDetail from "../hooks/usePokemonDetail";
 import usePokemonList from "../hooks/usePokemonList";
 
 const PokemonsPage = () => {
+  const refreshTint = useThemeColor("refreshControlTint");
   const { searchQuery, setSearchQuery, searchKey, isSearchActive } =
     useDebouncedSearchInput();
 
@@ -46,7 +48,10 @@ const PokemonsPage = () => {
     return {
       id: searchDetail.id,
       name: searchDetail.name,
-      image: searchDetail.sprites?.front_default ?? "",
+      image:
+        searchDetail.sprites?.other?.home?.front_default ||
+        searchDetail.sprites?.front_default ||
+        "",
       types: searchDetail.types.map((t) => t.type.name),
     };
   }, [searchDetail]);
@@ -103,7 +108,7 @@ const PokemonsPage = () => {
             <RefreshControl
               refreshing={isRefetching}
               onRefresh={() => void refetch()}
-              tintColor="#64748b"
+              tintColor={refreshTint}
             />
           }
           ListEmptyComponent={

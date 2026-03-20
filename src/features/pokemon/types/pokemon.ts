@@ -38,9 +38,8 @@ interface ISprite {
   front_shiny: string;
   back_shiny: string;
   other?: {
-    home?: {
-      front_default?: string;
-    };
+    home?: { front_default: string };
+    "official-artwork"?: { front_default: string };
   };
 }
 
