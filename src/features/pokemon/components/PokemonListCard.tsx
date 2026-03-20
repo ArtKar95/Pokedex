@@ -1,9 +1,10 @@
 import cn from "@/shared/utils/cn";
-import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import type { IPokemonListRow } from "../types/pokemon";
 import getPokemonBgClass from "../utils/getPokemonBgClass";
+import PokemonImage from "./PokemonImage";
+
 interface IPokemonListCardProps {
   pokemon: IPokemonListRow;
 }
@@ -19,11 +20,7 @@ const PokemonListCard = ({ pokemon }: IPokemonListCardProps) => {
     >
       <Pressable className="active:opacity-90">
         <View className={cn("items-center rounded-3xl px-3 pb-4 pt-5", typeBg)}>
-          <Image
-            source={{ uri: image }}
-            style={{ width: "100%", height: 112 }}
-            contentFit="contain"
-          />
+          <PokemonImage uri={image ?? ""} width={120} height={120} />
           <Text
             className="mt-2 text-center text-base font-bold text-slate-900 dark:text-slate-100"
             numberOfLines={1}

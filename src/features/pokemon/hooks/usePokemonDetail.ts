@@ -8,7 +8,7 @@ const usePokemonDetail = (searchParam: string, enableErrorToast = true) =>
   useQuery({
     queryKey: [QUERY_KEY, searchParam],
     queryFn: () => getPokemonDetail(searchParam),
-    enabled: !!searchParam.length,
+    enabled: !!searchParam,
     retry: 1,
     meta: {
       onError: () => {
