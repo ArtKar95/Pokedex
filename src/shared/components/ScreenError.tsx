@@ -1,8 +1,9 @@
 import cn from "@/shared/utils/cn";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, Text, useColorScheme, View } from "react-native";
-import type { Edge } from "react-native-safe-area-context";
+import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { EDGES } from "../constants";
+import useThemeColor from "../hooks/useThemeColor";
 
 interface IScreenErrorProps {
   onRetry: () => void;
@@ -11,7 +12,6 @@ interface IScreenErrorProps {
   className?: string;
   messageClassName?: string;
   retryClassName?: string;
-  edges?: readonly Edge[];
   onBack?: () => void;
 }
 
@@ -22,19 +22,14 @@ const ScreenError = ({
   className,
   messageClassName,
   retryClassName,
-  edges,
   onBack,
 }: IScreenErrorProps) => {
-  const scheme = useColorScheme();
-  const iconColor = scheme === "dark" ? "#f1f5f9" : "#0f172a";
+  const iconColor = useThemeColor("icon");
 
   return (
     <SafeAreaView
-      className={cn(
-        "flex-1 bg-slate-100 dark:bg-slate-950",
-        className,
-      )}
-      edges={edges}
+      className={cn("flex-1 bg-slate-100 dark:bg-slate-950", className)}
+      edges={EDGES}
       style={{ flex: 1 }}
     >
       {onBack ? (

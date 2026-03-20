@@ -1,20 +1,21 @@
 import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
+import ScreenNotice from "@/shared/components/ScreenNotice";
+import { EDGES } from "@/shared/constants";
+import useThemeColor from "@/shared/hooks/useThemeColor";
 import cn from "@/shared/utils/cn";
 import { useRouter } from "expo-router";
-import { ScrollView, useColorScheme, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PokemonDetailHeader from "../components/PokemonDetailHeader";
 import PokemonDetailTabs from "../components/PokemonDetailTabs/PokemonDetailTabs";
 import PokemonImage from "../components/PokemonImage";
-import ScreenNotice from "../components/ScreenNotice";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 import getPokemonBgClass from "../utils/getPokemonBgClass";
 
 const PokemonDetailPage = ({ id }: { id: string }) => {
   const router = useRouter();
-  const scheme = useColorScheme();
-  const iconColor = scheme === "dark" ? "#f1f5f9" : "#0f172a";
+  const iconColor = useThemeColor("icon");
   const { data, isPending, isError, refetch } = usePokemonDetail(id);
 
   if (!id) {
@@ -40,7 +41,6 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
         className="bg-white dark:bg-slate-900"
         messageClassName="text-slate-600 dark:text-slate-400"
         retryClassName="text-slate-900 dark:text-slate-100"
-        edges={["top", "left", "right"]}
         onBack={() => router.back()}
       />
     );
@@ -56,7 +56,7 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
     <View className="bg-white dark:bg-slate-900" style={{ flex: 1 }}>
       <SafeAreaView
         className="bg-white dark:bg-slate-900"
-        edges={["top", "left", "right"]}
+        edges={EDGES}
         style={{ flex: 1 }}
       >
         <PokemonDetailHeader
@@ -79,12 +79,6 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
                 "w-full items-center justify-center overflow-hidden rounded-3xl",
                 imageBgClass,
               )}
-              style={{
-                width: "100%",
-                maxWidth: 320,
-                aspectRatio: 1,
-                alignSelf: "center",
-              }}
             >
               <PokemonImage uri={uri} width={250} height={250} />
             </View>
