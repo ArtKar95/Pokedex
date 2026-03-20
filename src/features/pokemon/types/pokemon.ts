@@ -37,7 +37,13 @@ interface ISprite {
   back_default: string;
   front_shiny: string;
   back_shiny: string;
+  other?: {
+    home?: {
+      front_default?: string;
+    };
+  };
 }
+
 export interface IPokemonDetail {
   id: number;
   name: string;
