@@ -1,9 +1,10 @@
 import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
 import { EDGES } from "@/shared/constants";
+import useThemeColor from "@/shared/hooks/useThemeColor";
 import cn from "@/shared/utils/cn";
 import { useRouter } from "expo-router";
-import { ScrollView, useColorScheme, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PokemonDetailHeader from "../components/PokemonDetailHeader";
 import PokemonDetailTabs from "../components/PokemonDetailTabs/PokemonDetailTabs";
@@ -14,8 +15,7 @@ import getPokemonBgClass from "../utils/getPokemonBgClass";
 
 const PokemonDetailPage = ({ id }: { id: string }) => {
   const router = useRouter();
-  const scheme = useColorScheme();
-  const iconColor = scheme === "dark" ? "#f1f5f9" : "#0f172a";
+  const iconColor = useThemeColor("icon");
   const { data, isPending, isError, refetch } = usePokemonDetail(id);
 
   if (!id) {
