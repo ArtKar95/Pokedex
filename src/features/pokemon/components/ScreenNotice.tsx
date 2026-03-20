@@ -21,10 +21,7 @@ const ScreenNotice = ({
       <Text className="text-center text-base text-slate-600 dark:text-slate-400">
         {message}
       </Text>
-      <Pressable
-        className="mt-4 items-center"
-        onPress={() => void onAction()}
-      >
+      <Pressable className="mt-4 items-center" onPress={() => void onAction()}>
         <Text className="text-center text-base font-semibold text-slate-900 dark:text-slate-100">
           {actionLabel}
         </Text>

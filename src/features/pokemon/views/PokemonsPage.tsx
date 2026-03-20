@@ -2,6 +2,7 @@ import EmptyMessage from "@/shared/components/EmptyMessage";
 import Loader from "@/shared/components/Loader";
 import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
+import { EDGES } from "@/shared/constants";
 import useDebouncedSearchInput from "@/shared/hooks/useDebouncedSearchInput";
 import { useCallback, useMemo } from "react";
 import { FlatList, RefreshControl, View } from "react-native";
@@ -78,7 +79,7 @@ const PokemonsPage = () => {
 
   return (
     <View className="flex-1 bg-slate-100 dark:bg-slate-950">
-      <SafeAreaView className="flex-1" edges={["top", "left", "right"]}>
+      <SafeAreaView className="flex-1" edges={EDGES}>
         <PokemonListHeader
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}

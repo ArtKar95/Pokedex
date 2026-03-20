@@ -1,5 +1,6 @@
 import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
+import { EDGES } from "@/shared/constants";
 import cn from "@/shared/utils/cn";
 import { useRouter } from "expo-router";
 import { ScrollView, useColorScheme, View } from "react-native";
@@ -40,7 +41,6 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
         className="bg-white dark:bg-slate-900"
         messageClassName="text-slate-600 dark:text-slate-400"
         retryClassName="text-slate-900 dark:text-slate-100"
-        edges={["top", "left", "right"]}
         onBack={() => router.back()}
       />
     );
@@ -56,7 +56,7 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
     <View className="bg-white dark:bg-slate-900" style={{ flex: 1 }}>
       <SafeAreaView
         className="bg-white dark:bg-slate-900"
-        edges={["top", "left", "right"]}
+        edges={EDGES}
         style={{ flex: 1 }}
       >
         <PokemonDetailHeader
@@ -79,12 +79,6 @@ const PokemonDetailPage = ({ id }: { id: string }) => {
                 "w-full items-center justify-center overflow-hidden rounded-3xl",
                 imageBgClass,
               )}
-              style={{
-                width: "100%",
-                maxWidth: 320,
-                aspectRatio: 1,
-                alignSelf: "center",
-              }}
             >
               <PokemonImage uri={uri} width={250} height={250} />
             </View>
