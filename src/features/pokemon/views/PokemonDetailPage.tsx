@@ -1,5 +1,6 @@
 import ScreenError from "@/shared/components/ScreenError";
 import ScreenLoading from "@/shared/components/ScreenLoading";
+import ScreenNotice from "@/shared/components/ScreenNotice";
 import { EDGES } from "@/shared/constants";
 import useThemeColor from "@/shared/hooks/useThemeColor";
 import cn from "@/shared/utils/cn";
@@ -9,7 +10,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PokemonDetailHeader from "../components/PokemonDetailHeader";
 import PokemonDetailTabs from "../components/PokemonDetailTabs/PokemonDetailTabs";
 import PokemonImage from "../components/PokemonImage";
-import ScreenNotice from "../components/ScreenNotice";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 import getPokemonBgClass from "../utils/getPokemonBgClass";
 
